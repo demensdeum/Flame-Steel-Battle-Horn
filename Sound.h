@@ -1,4 +1,5 @@
 #ifndef FSBH_SOUND_H_
+#define FSBH_SOUND_H_
 
 #include <memory>
 #include <string>
@@ -9,12 +10,12 @@
 
 using namespace std;
 
-namespace FlameSteelGameToolkit {
 namespace FlameSteelBattleHorn {
 
 class Sound {
 
 public:
+	static void initializeSoundSystem();
 	Sound(shared_ptr<string> path);
 	void play();
 	void stop();
@@ -28,7 +29,6 @@ private:
 
 };
 
-}
 }
 
 #endif
