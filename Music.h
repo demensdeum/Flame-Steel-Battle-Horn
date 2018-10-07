@@ -1,5 +1,5 @@
-#ifndef FSBH_SOUND_H_
-#define FSBH_SOUND_H_
+#ifndef FSBH_MUSIC_H_
+#define FSBH_MUSIC_H_
 
 #include <FlameSteelBattleHorn/Playable.h>
 
@@ -11,22 +11,20 @@
 #endif
 
 using namespace std;
-using namespace FlameSteelBattleHorn;
 
 namespace FlameSteelBattleHorn {
 
-class Sound: public Playable {
+class Music: public Playable {
 
 public:
-	static void initializeSoundSystem();
-	Sound(shared_ptr<string> path);
+	Music(shared_ptr<string> path);
 	void play();
 	void stop();
-	virtual ~Sound();
+	virtual ~Music();
 
 private:
 #ifndef __EMSCRIPTEN__
-	Mix_Chunk *chunk = nullptr;
+	Mix_Music *music = nullptr;
 #endif
 
 };
