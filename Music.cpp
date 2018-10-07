@@ -1,6 +1,10 @@
 #include <FlameSteelBattleHorn/Music.h>
 #include <iostream>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 using namespace FlameSteelBattleHorn;
 
 Music::Music(shared_ptr<string> path) {
@@ -28,6 +32,11 @@ void Music::play() {
 	else {
 			throw runtime_error("Can't play music - music is null");
 	}
+#else
+  EM_ASM({
+	var audio = new Audio('data/com.demensdeum.deathmaskgame.dc113.ogg');
+	audio.play();
+  });	
 #endif
 }
 

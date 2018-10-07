@@ -1,6 +1,10 @@
 #include <FlameSteelBattleHorn/Sound.h>
 #include <iostream>
 
+#ifdef __EMSCRIPTEN__
+#include <emscripten.h>
+#endif
+
 using namespace FlameSteelBattleHorn;
 
 void Sound::initializeSoundSystem() {
@@ -39,7 +43,7 @@ Sound::Sound(shared_ptr<string> path) {
 		cout << "Can't load sound " << Mix_GetError() << endl;
 		throw runtime_error("Can't load sound");
 	}
-	
+
 #endif
 }
 
@@ -51,6 +55,11 @@ void Sound::play() {
 			printf("Mix_PlayChannel: %s\n",Mix_GetError());
 		}		
 	}
+#else
+	EM_ASM({
+		var audio = new Audio('data/com.demensdeum.deathmask.beep.ogg');
+		audio.play();
+	});	
 #endif
 }
 
