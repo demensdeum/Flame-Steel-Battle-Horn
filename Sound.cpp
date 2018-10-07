@@ -47,7 +47,9 @@ void Sound::play() {
 
 #ifndef __EMSCRIPTEN__
 	if (chunk) {
-		
+		if (Mix_PlayChannel(-1, chunk, 0)==-1) {
+			printf("Mix_PlayChannel: %s\n",Mix_GetError());
+		}		
 	}
 #endif
 }
