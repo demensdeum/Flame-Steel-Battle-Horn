@@ -18,6 +18,10 @@ Music::Music(shared_ptr<string> path) {
 		throw runtime_error("Can't load music");
 	}
 	
+#else
+
+	this->path = path;
+
 #endif
 }
 
@@ -33,10 +37,22 @@ void Music::play() {
 			throw runtime_error("Can't play music - music is null");
 	}
 #else
-  EM_ASM({
-	var audio = new Audio('data/com.demensdeum.deathmaskgame.dc113.ogg');
-	audio.play();
-  });	
+	if (path.get() != nullptr) {
+
+		cout << "play sound through javascript" << endl;
+
+		EM_ASM_({
+
+			var audioPath = Pointer_stringify($0);
+
+			var audio = new Audio(audioPath);
+			audio.play();
+
+		}, path->c_str());
+	}
+	else {
+		cout << "can't play sound - path is null" << endl;
+	}
 #endif
 }
 

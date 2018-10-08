@@ -25,6 +25,8 @@ public:
 private:
 #ifndef __EMSCRIPTEN__
 	Mix_Music *music = nullptr;
+#else
+	shared_ptr<string> path;
 #endif
 
 };

@@ -27,6 +27,8 @@ public:
 private:
 #ifndef __EMSCRIPTEN__
 	Mix_Chunk *chunk = nullptr;
+#else
+	shared_ptr<string> path;
 #endif
 
 };

@@ -43,6 +43,9 @@ Sound::Sound(shared_ptr<string> path) {
 		cout << "Can't load sound " << Mix_GetError() << endl;
 		throw runtime_error("Can't load sound");
 	}
+#else
+
+	this->path = path;
 
 #endif
 }
@@ -56,10 +59,22 @@ void Sound::play() {
 		}		
 	}
 #else
-	EM_ASM({
-		var audio = new Audio('data/com.demensdeum.deathmask.beep.ogg');
-		audio.play();
-	});	
+	if (path.get() != nullptr) {
+
+		cout << "play sound through javascript" << endl;
+
+		EM_ASM_({
+
+			var audioPath = Pointer_stringify($0);
+
+			var audio = new Audio(audioPath);
+			audio.play();
+
+		}, path->c_str());
+	}
+	else {
+		cout << "can't play sound - path is null" << endl;
+	}
 #endif
 }
 
