@@ -44,8 +44,10 @@ void Music::play() {
 		EM_ASM_({
 
 			var audioPath = Pointer_stringify($0);
+			audioPath += ".mp3";
 
 			var audio = new Audio(audioPath);
+			audio.loop = true;
 			audio.play();
 
 		}, path->c_str());
