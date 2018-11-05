@@ -14,7 +14,7 @@ Music::Music(shared_ptr<string> path) {
 	music = Mix_LoadMUS(path->c_str());
 
 	if (music == nullptr) {
-		cout << "Can't load music " << Mix_GetError() << endl;
+		//cout << "Can't load music " << Mix_GetError() << endl;
 		throw runtime_error("Can't load music");
 	}
 	
@@ -39,7 +39,7 @@ void Music::play() {
 #else
 	if (path.get() != nullptr) {
 
-		cout << "play sound through javascript" << endl;
+		//cout << "play sound through javascript" << endl;
 
 		EM_ASM_({
 
@@ -53,7 +53,7 @@ void Music::play() {
 		}, path->c_str());
 	}
 	else {
-		cout << "can't play sound - path is null" << endl;
+		//cout << "can't play sound - path is null" << endl;
 	}
 #endif
 }

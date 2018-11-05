@@ -18,8 +18,8 @@ void Sound::initializeSoundSystem() {
 	int flags = MIX_INIT_OGG;
 	int initted = Mix_Init(flags);
 
-	cout << flags << endl;
-	cout << initted << endl;
+	//cout << flags << endl;
+	//cout << initted << endl;
 
 	if ((initted & flags) != flags) {
 	    printf("Mix_Init: Failed to init required ogg and mod support!\n");
@@ -27,7 +27,7 @@ void Sound::initializeSoundSystem() {
 	    throw runtime_error("Can't initialize SDL_Mixer properly");
 	}
 	else {
-		cout << "SDL_MIXER initialized correctly" << endl;
+		//cout << "SDL_MIXER initialized correctly" << endl;
 	}
 
 #endif
@@ -40,7 +40,7 @@ Sound::Sound(shared_ptr<string> path) {
 	chunk = Mix_LoadWAV(path->c_str());
 
 	if (chunk == nullptr) {
-		cout << "Can't load sound " << Mix_GetError() << endl;
+		//cout << "Can't load sound " << Mix_GetError() << endl;
 		throw runtime_error("Can't load sound");
 	}
 #else
@@ -61,7 +61,7 @@ void Sound::play() {
 #else
 	if (path.get() != nullptr) {
 
-		cout << "play sound through javascript" << endl;
+		//cout << "play sound through javascript" << endl;
 
 		EM_ASM_({
 
@@ -74,7 +74,7 @@ void Sound::play() {
 		}, path->c_str());
 	}
 	else {
-		cout << "can't play sound - path is null" << endl;
+		//cout << "can't play sound - path is null" << endl;
 	}
 #endif
 }
